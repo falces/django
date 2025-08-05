@@ -19,5 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('dartify/', include('dartify.urls')),
+    path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]
