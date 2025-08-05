@@ -3,4 +3,5 @@
 {% for choice in question.choice_set.all %}
     <li>{{ choice.choice_text }}</li>
 {% endfor %}
+<p><a href="{% url 'polls:index' %}">List</a></p>
 </ul>
