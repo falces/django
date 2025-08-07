@@ -7,6 +7,9 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .serializers import QuestionSerializer
 
 
 # def index(request):
@@ -87,3 +90,16 @@ class DetailView(generic.DetailView):
 class ResultsView(generic.DetailView):
     model = Question
     template_name = "polls/results.html"
+
+class QuestionsView(APIView):
+    def get(self, request):
+        questions = Question.objects.all()
+        serializer = QuestionSerializer(questions, many=True)
+        return Response(serializer.data)
+
+    # def post(self, request):
+    #     serializer = QuestionSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=201)
+    #     return Response(serializer.errors, status=400)
