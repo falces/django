@@ -6,10 +6,10 @@ class ChoiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Choice
         fields = '__all__'
+        fields = ['id', 'choice_text', 'votes']
         
 class QuestionSerializer(serializers.ModelSerializer):
     choices = ChoiceSerializer(many=True, read_only=True)
     class Meta:
         model = Question
         fields = '__all__'
-        
