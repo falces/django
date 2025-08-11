@@ -21,4 +21,13 @@ class QuestionSerializer(serializers.ModelSerializer):
         for choice in choices_data:
             Choice.objects.create(question=question, **choice)
         return question
-        
+    
+class QuestionUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields = ['question_text']
+    
+    def update(self, question, validated_data):
+        question.question_text = validated_data.get('question_text', question.question_text)
+        question.save()
+        return question
