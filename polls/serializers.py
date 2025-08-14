@@ -25,9 +25,21 @@ class QuestionSerializer(serializers.ModelSerializer):
 class QuestionUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
-        fields = ['question_text']
+        fields = '__all__'
+        extra_fields = ['choices']
     
     def update(self, question, validated_data):
+        print(validated_data)
+        choices_data = validated_data.pop('choices')
         question.question_text = validated_data.get('question_text', question.question_text)
+        question.pub_date = validated_data.get('pub_date', question.pub_date)
+
+        for new_choice in choices_data:
+            print(new_choice)
+            target_choice = Choice.objects.get(pk=new_choice.get('id'))
+            target_choice.choice_text = new_choice.get('choice_text', target_choice.choice_text)
+            target_choice.votes = new_choice.get('votes', target_choice.votes)
+            target_choice.save()
+
         question.save()
         return question

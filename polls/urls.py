@@ -1,5 +1,4 @@
 from django.urls import path
-
 from polls.views import views, apiviews
 
 
@@ -23,5 +22,5 @@ urlpatterns = [
     path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
     path("<int:question_id>/vote/", views.vote, name="vote"),
     path('api/questions', apiviews.QuestionsView.as_view(), name='api_questions'),
-    path('api/questions/<int:pk>', apiviews.QuestionsView.as_view(), name='api_questions'),
+    path('api/questions/<int:pk>', apiviews.QuestionsView.as_view(), name='api_question_edit'),
 ]
