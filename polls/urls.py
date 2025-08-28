@@ -26,4 +26,6 @@ urlpatterns = [
     path('api/test-security', apiviews.TestSecurityView.as_view(), name='api_test_security'),
     path('api/customClassView', apiviews.testClassView.as_view(), name='api_custom_class_view'),
     path('api/customFunctionView', apiviews.testFuncionView, name='api_custom_function_view'),
+    path('api/customFunctionViewResponse', apiviews.testFuncionViewResponse, name='api_custom_function_view_response'),
+    path('api/customMultiMethod', apiviews.testMultiMethod, name='api_custom_multi_method'),
 ]

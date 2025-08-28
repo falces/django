@@ -6,9 +6,23 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
+@api_view(['GET', 'POST'])
+def testMultiMethod(request):
+    if request.method == 'GET':
+        return JsonResponse({"message": "GET"})
+    elif request.method == 'POST':
+        return JsonResponse({"message": "POST"})
+
 @api_view(['GET'])
 def testFuncionView(request):
     return JsonResponse({"message": "Hello, world!"})
+
+@api_view(['GET'])
+def testFuncionViewResponse(request):
+    return Response(
+        {"message": "Response from Response"},
+        status=200,
+    )
 
 class testClassView(APIView):
     def get(self, request):
