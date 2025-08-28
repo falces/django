@@ -3,7 +3,18 @@ from rest_framework.response import Response
 from polls.serializers import QuestionSerializer, QuestionUpdateSerializer
 from polls.models import Question
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.http import JsonResponse
 
+class CustomSerialization(APIView):
+    def get(self, request):
+        questions = Question.objects.all()
+        data = []
+        for question in questions:
+            data.append({
+                "id": question.id,
+                "question_text": question.question_text,
+            })
+        return JsonResponse(data, safe=False)
 
 class QuestionsView(APIView):
     

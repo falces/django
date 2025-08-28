@@ -24,4 +24,5 @@ urlpatterns = [
     path('api/questions', apiviews.QuestionsView.as_view(), name='api_questions'),
     path('api/questions/<int:pk>', apiviews.QuestionsView.as_view(), name='api_question_edit'),
     path('api/test-security', apiviews.TestSecurityView.as_view(), name='api_test_security'),
+    path('api/custom', apiviews.CustomSerialization.as_view(), name='api_custom'),
 ]
