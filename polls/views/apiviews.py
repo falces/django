@@ -4,8 +4,13 @@ from polls.serializers import QuestionSerializer, QuestionUpdateSerializer
 from polls.models import Question
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.http import JsonResponse
+from rest_framework.decorators import api_view
 
-class CustomSerialization(APIView):
+@api_view(['GET'])
+def testFuncionView(request):
+    return JsonResponse({"message": "Hello, world!"})
+
+class testClassView(APIView):
     def get(self, request):
         questions = Question.objects.all()
         data = []
