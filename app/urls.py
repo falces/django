@@ -40,7 +40,7 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('user', include('user.urls')),
+    path('user/', include('user.urls')),
 ]
 
 if not settings.TESTING:

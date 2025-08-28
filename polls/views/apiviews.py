@@ -2,9 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from polls.serializers import QuestionSerializer, QuestionUpdateSerializer
 from polls.models import Question
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
 
 class QuestionsView(APIView):
+    
     def get(self, request):
         questions = Question.objects.all()
         serializer = QuestionSerializer(questions, many=True)
@@ -34,3 +36,9 @@ class QuestionsView(APIView):
             serializer = QuestionSerializer(question)
             return Response(serializer.data, status=200)
         return Response(serializer.errors, status=400)
+    
+class TestSecurityView(APIView):
+    permission_classes = [AllowAny]
+    
+    def get(self, request):
+        return Response({"message": "Hello, secured world! The request was permitted."})

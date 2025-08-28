@@ -23,4 +23,5 @@ urlpatterns = [
     path("<int:question_id>/vote/", views.vote, name="vote"),
     path('api/questions', apiviews.QuestionsView.as_view(), name='api_questions'),
     path('api/questions/<int:pk>', apiviews.QuestionsView.as_view(), name='api_question_edit'),
+    path('api/test-security', apiviews.TestSecurityView.as_view(), name='api_test_security'),
 ]
