@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from polls.serializers import QuestionSerializer, QuestionUpdateSerializer, TestQuestionSerializer
+from polls.serializers import QuestionSerializer, QuestionUpdateSerializer, TestQuestionSerializer, TestQuestionSerializerUpdate
 from polls.models import Question
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.http import JsonResponse
@@ -22,6 +22,20 @@ def testSerializer(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+    
+@api_view(['PUT'])
+def updateQuestion(request, pk):
+    try:
+        question = Question.objects.get(pk=pk)
+        if request.method == 'PUT':
+            serializer = TestQuestionSerializerUpdate(question, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=204)
+            return Response(serializer.errors, status=400)
+    except Question.DoesNotExist:
+        return Response("Not found", status=404)
+
 
 @api_view(['GET', 'POST'])
 def testMultiMethod(request):

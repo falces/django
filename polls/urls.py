@@ -29,4 +29,5 @@ urlpatterns = [
     path('api/customFunctionViewResponse', apiviews.testFuncionViewResponse, name='api_custom_function_view_response'),
     path('api/customMultiMethod', apiviews.testMultiMethod, name='api_custom_multi_method'),
     path('api/customSerializer', apiviews.testSerializer, name='api_custom_serializer'),
+    path('api/customSerializer/<int:pk>', apiviews.updateQuestion, name='api_custom_serializer_update'),
 ]

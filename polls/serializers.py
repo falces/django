@@ -21,6 +21,16 @@ class TestQuestionSerializer(serializers.Serializer):
         question = Question.objects.create(**validated_data)
         return question
 
+class TestQuestionSerializerUpdate(serializers.Serializer):
+    question_text = serializers.CharField(max_length=200)
+    
+    def update(self, instance, validated_data):
+        # Si question_text no existe, toma el valor que ya tenía (segundo parámetro)
+        instance.question_text = validated_data.get('question_text', instance.question_text)
+        
+        instance.save()
+        return instance
+
 class QuestionSerializer(serializers.ModelSerializer):
     choices = ChoiceSerializer(many=True)
     class Meta:
