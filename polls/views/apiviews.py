@@ -76,6 +76,7 @@ class QuestionsView(APIView):
         serializer = QuestionSerializer(questions, many=True)
         return Response(serializer.data)
 
+    @swagger_auto_schema(request_body=QuestionSerializer)
     def post(self, request):
         serializer = QuestionSerializer(data=request.data)
         if serializer.is_valid():
@@ -83,6 +84,7 @@ class QuestionsView(APIView):
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
     
+    @swagger_auto_schema(request_body=TestQuestionSerializerUpdate)
     def put(self, request, pk):
         question = Question.objects.get(pk=pk)
         serializer = QuestionSerializer(question, data=request.data)
