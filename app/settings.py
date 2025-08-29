@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 from dotenv import load_dotenv
 import os, sys
+from datetime import timedelta
 
 load_dotenv()
 
@@ -191,3 +192,4 @@ SWAGGER_SETTINGS = {
 }
 
 AUTH_USER_MODEL = 'user.CustomUser'
+AUTH_TOKEN_VALIDITY = timedelta(days=1)

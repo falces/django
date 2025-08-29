@@ -28,4 +28,5 @@ urlpatterns = [
     path('api/customFunctionView', apiviews.testFuncionView, name='api_custom_function_view'),
     path('api/customFunctionViewResponse', apiviews.testFuncionViewResponse, name='api_custom_function_view_response'),
     path('api/customMultiMethod', apiviews.testMultiMethod, name='api_custom_multi_method'),
+    path('api/customSerializer', apiviews.testSerializer, name='api_custom_serializer'),
 ]

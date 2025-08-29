@@ -8,6 +8,19 @@ class ChoiceSerializer(serializers.ModelSerializer):
         fields = ['id', 'choice_text', 'votes']
         read_only_fields = ['question']
         
+class TestQuestionSerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    question_text = serializers.CharField(max_length=200)
+    # pub_date = serializers.DateTimeField()
+    # choices = ChoiceSerializer(many=True)
+
+    # Método POST
+    def create(self, validated_data):
+        validated_data.pop('id')
+        validated_data["pub_date"] = "2025-01-01 00:00:00"
+        question = Question.objects.create(**validated_data)
+        return question
+
 class QuestionSerializer(serializers.ModelSerializer):
     choices = ChoiceSerializer(many=True)
     class Meta:
